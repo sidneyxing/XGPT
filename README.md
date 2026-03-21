@@ -1,1 +1,1 @@
-# SidneyGPT
+# XGPT
