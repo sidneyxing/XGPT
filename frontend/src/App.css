@@ -1,5 +1,4 @@
 body{
-
 margin:0;
 font-family:'Inter', sans-serif;
 
@@ -11,11 +10,9 @@ background-position:center;
 color:white;
 
 animation:pageLoad 1.2s ease;
-
 }
 
 .layout{
-
 display:flex;
 height:100vh;
 
@@ -23,20 +20,14 @@ background:rgba(10,0,25,0.75);
 backdrop-filter:blur(6px);
 
 animation:fadeIn 0.7s ease;
-
 }
 
 @keyframes fadeIn{
-
 0%{opacity:0;transform:translateY(20px)}
 100%{opacity:1;transform:translateY(0)}
-
 }
 
-/* sidebar */
-
 .sidebar{
-
 width:260px;
 
 background:linear-gradient(
@@ -46,15 +37,11 @@ background:linear-gradient(
 );
 
 padding:20px;
-
 box-shadow:4px 0 20px rgba(0,0,0,0.4);
-
 }
 
 .logo{
-
 font-family: 'Sora', sans-serif;
-
 font-size:26px;
 font-weight:800;
 
@@ -69,11 +56,9 @@ background:linear-gradient(
 -webkit-text-fill-color:transparent;
 
 margin-bottom:20px;
-
 }
 
 .newChat{
-
 width:100%;
 padding:10px;
 
@@ -85,21 +70,15 @@ border-radius:10px;
 color:white;
 
 cursor:pointer;
-
 margin-bottom:20px;
-
 }
 
 .chatItem{
-
 padding:10px;
-
 border-radius:6px;
 
 cursor:pointer;
-
 margin-bottom:6px;
-
 transition:0.2s;
 
 clip-path:polygon(
@@ -115,70 +94,50 @@ calc(100% - 8px) 100%,
 
 background: #a855f7;
 color: rgb(32, 5, 63);
-
 }
 
 .chatItem:hover{
-
 background:#5d4072;
-
 }
 
 .chatItem.active{
-
 background:#bb90dc;
-
 }
 
 .chatArea{
-
 flex:1;
 display:flex;
 flex-direction:column;
 
 background:transparent;
-
 }
 
 .welcome{
-
 text-align:center;
 margin-top:140px;
 
 animation:fadeWelcome 1.4s ease;
-
 }
 
 @keyframes fadeWelcome{
-
 0%{opacity:0;transform:translateY(40px)}
 100%{opacity:1;transform:translateY(0)}
-
 }
 
-/* chat */
-
 .chat{
-
 flex:1;
-
-overflow:auto;
-
-padding:30px;
-
 display:flex;
 flex-direction:column;
 
+overflow:auto;
+padding:30px;
 gap: 6px;
-
 }
 
 .userBubble{
-
 align-self:flex-end;
 
 background:#6d28d9;
-
 color:white;
 
 max-width:60%;
@@ -195,15 +154,12 @@ calc(100% - 10px) 100%,
 );
 
 box-shadow:0 4px 18px rgba(0,0,0,0.35);
-
 }
 
 .aiBubble{
-
 align-self:flex-start;
 
 background:#e9d5ff;
-
 color:#2e1065;
 
 max-width:75%;
@@ -220,7 +176,6 @@ calc(100% - 10px) 100%,
 );
 
 box-shadow:0 4px 18px rgba(0,0,0,0.25);
-
 }
 
 .userBubble, .aiBubble {
@@ -239,102 +194,63 @@ box-shadow:0 4px 18px rgba(0,0,0,0.25);
     display: inline;
 }
 
-
 .copyBtn{
-
 position:absolute;
 
 top:6px;
 right:8px;
 
 font-size:11px;
-
-background:#482b7b;
-
-border:none;
-
-color:white;
-
 padding:2px 6px;
 
+background:#482b7b;
+color:white;
+opacity:0;
+
+border:none;
 border-radius:6px;
 
 cursor:pointer;
-
-opacity:0;
-
 transition:0.2s;
-
 }
 
 .userBubble:hover .copyBtn,
 .aiBubble:hover .copyBtn{
-
 opacity:1;
-
 }
-
-.userBubble:hover .copyBtn,
-.aiBubble:hover .copyBtn{
-
-opacity:1;
-
-}
-
-/* typing */
 
 .typing{
-
 opacity:0.6;
-
 animation:pulse 1.2s infinite;
-
 }
 
 @keyframes pulse{
-
 0%{opacity:0.4}
 50%{opacity:1}
 100%{opacity:0.4}
-
 }
 
-/* ai mode */
-
 .modeSelector{
-
 display:flex;
 gap:10px;
 
 padding:10px 20px;
-
 }
 
-
-
 .mode{
-
 background:#2e1065;
-
-border:none;
-
 color:white;
 
-padding:6px 12px;
-
+border:none;
 border-radius:8px;
 
+padding:6px 12px;
 cursor:pointer;
-
 }
 
 .mode.active{
-
 background:#7c3aed;
-
 }
-
-/* input */
 
 .inputWrapper{
 position:relative;
@@ -349,8 +265,6 @@ border:none;
 background:#2e1065;
 color:white;
 }
-
-
 
 .sendBtn{
   position:absolute;
@@ -373,23 +287,17 @@ transform:translateY(-50%) scale(1.2);
 
 
 .renameInput{
-
 width:100%;
-
 background:transparent;
 
 border:none;
-
 color:rgb(32, 5, 63);
 
 font-size:14px;
-
 outline:none;
-
 }
 
 @keyframes pageLoad{
-
 0%{
 opacity:0;
 filter:blur(10px);
@@ -399,65 +307,44 @@ filter:blur(10px);
 opacity:1;
 filter:blur(0);
 }
-
 }
 
 .contextMenu{
-
 position:absolute;
-
 background:#1e0f3d;
 
 border-radius:8px;
-
 box-shadow:0 6px 20px rgba(0,0,0,0.4);
 
 padding:6px 0;
-
 z-index:999;
-
 min-width:120px;
-
 }
 
 .menuItem{
-
 padding:8px 14px;
-
 cursor:pointer;
 
 font-size:14px;
-
 color:white;
-
 }
 
 .menuItem:hover{
-
 background:#7c3aed;
-
 }
 
 .menuItem.delete:hover{
-
 background:#dc2626;
-
 }
 
 .stopBtn{
-
 margin:10px 20px;
-
 background:#dc2626;
 
 color:white;
-
 border:none;
 
 padding:8px 16px;
-
 border-radius:8px;
-
 cursor:pointer;
-
 }

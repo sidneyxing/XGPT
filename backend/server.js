@@ -21,28 +21,51 @@ app.post("/chat", async (req, res) => {
 
   try {
 
-    const response = await client.chat.completions.create({
-      model: model,
+  const selectedModel = model || "llama-3.1-8b-instant"
+
+  const response = await client.chat.completions.create({
+    model: selectedModel,
+    messages: messages,
+    temperature: temperature,
+    max_tokens: max_tokens
+  })
+
+  const text = response.choices[0].message.content
+
+  res.json({
+    reply: text
+  })
+
+} catch (err) {
+
+  console.log("Main model failed, trying fallback...")
+
+  try {
+
+    const fallbackResponse = await client.chat.completions.create({
+      model: "mixtral-8x7b-32768", // fallback model
       messages: messages,
       temperature: temperature,
       max_tokens: max_tokens
     })
 
-    const text = response.choices[0].message.content
+    const text = fallbackResponse.choices[0].message.content
 
     res.json({
       reply: text
     })
 
-  } catch(err){
+  } catch (fallbackErr) {
 
-    console.error("Groq API Error:", err)
+    console.error("Both models failed:", fallbackErr)
 
     res.status(500).json({
-      error: "Groq API failed"
+      error: "All models failed"
     })
 
   }
+
+}
 
 })
 

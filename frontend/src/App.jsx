@@ -114,7 +114,7 @@ signal: controller.signal,
 body:JSON.stringify({
 
 messages:[...activeChat.messages,userMessage],
-model:"llama-3.1-8b-instant",
+model,
 temperature:getTemperature(),
 max_tokens:1500
 
