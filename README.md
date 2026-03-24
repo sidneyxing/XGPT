@@ -61,7 +61,7 @@ The backend is built with **Node.js (Express)** and acts as a middleware between
 
 ---
 
-## Model Handling (Important)
+## Model Handling
 
 The model is **NOT controlled by the frontend UI**.
 
@@ -69,25 +69,6 @@ The model is **NOT controlled by the frontend UI**.
 
 * Backend uses a **default model**
 * If the request fails, it automatically switches to a **fallback model**
-
-### Example Logic:
-
-```js
-const selectedModel = model || "llama-3.1-8b-instant"
-```
-
-If the primary model fails:
-
-```js
-fallback → mixtral-8x7b-32768
-```
-
-### Why this approach?
-
-* Keeps UI simple
-* Prevents user misconfiguration
-* Improves system reliability
-* Mimics real production architecture
 
 ---
 
