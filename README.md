@@ -22,14 +22,26 @@ A simple full-stack AI chatbot application using a custom LLM API.
 my-own-gpt/
 │
 ├── backend/
-│   ├── server.js
-│   ├── package.json
-│   └── .env (not included)
+│   ├── server.js            # Main backend server (API handler)
+│   ├── package.json         # Backend dependencies
+│   ├── package-lock.json
+│   └── .env (not included)  # Store API key securely
 │
 ├── frontend/
-│   ├── src/
 │   ├── public/
-│   └── package.json
+│   │   └── bg.png           # Background image (UI asset)
+│   │
+│   ├── src/
+│   │   ├── App.jsx          # Main chatbot UI & logic
+│   │   ├── App.css          # Styling (layout, colors, UI)
+│   │   └── main.jsx         # React entry point
+│   │
+│   ├── index.html           # Root HTML template
+│   ├── package.json         # Frontend dependencies
+│   └── package-lock.json
+│
+├── .gitignore               # Ignore sensitive & unnecessary files
+└── README.md               # Project documentation
 ```
 
 ## Installation
