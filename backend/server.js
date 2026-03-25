@@ -17,58 +17,79 @@ const client = new OpenAI({
 
 app.post("/chat", async (req, res) => {
 
-  const {messages, model, temperature, max_tokens} = req.body
+  console.log("REQ BODY:", req.body)
+
+  let { messages, model, temperature, max_tokens } = req.body
+
+  // ✅ safety default
+  const selectedModel = model || "llama-3.1-8b-instant"
+  const safeMessages = messages?.length
+    ? messages
+    : [{ role: "user", content: "Hello" }]
+
+  const safeTemp = temperature ?? 0.7
+  const safeMaxTokens = max_tokens ?? 512
 
   try {
 
-  const selectedModel = model || "llama-3.1-8b-8192"
-
-  const response = await client.chat.completions.create({
-    model: selectedModel,
-    messages: messages,
-    temperature: temperature,
-    max_tokens: max_tokens
-  })
-
-  const text = response.choices[0].message.content
-
-  res.json({
-    reply: text
-  })
-
-} catch (err) {
-
-  console.log("Main model failed, trying fallback...")
-
-  try {
-
-    const fallbackResponse = await client.chat.completions.create({
-      model: "mixtral-8x7b-32768", // fallback model
-      messages: messages,
-      temperature: temperature,
-      max_tokens: max_tokens
+    const response = await client.chat.completions.create({
+      model: selectedModel,
+      messages: safeMessages,
+      temperature: safeTemp,
+      max_tokens: safeMaxTokens
     })
 
-    const text = fallbackResponse.choices[0].message.content
+    console.log("AI RAW RESPONSE:", response)
 
-    res.json({
+    const text =
+      response?.choices?.[0]?.message?.content ||
+      "⚠️ Empty response from AI"
+
+    return res.json({
       reply: text
     })
 
-  } catch (fallbackErr) {
+  } catch (err) {
 
-    console.error("Both models failed:", fallbackErr)
+    console.error(
+      "Main model error:",
+      err.response?.data || err.message
+    )
 
-    res.status(500).json({
-      error: "All models failed"
-    })
+    console.log("Trying fallback model...")
 
+    try {
+
+      const fallbackResponse = await client.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        messages: safeMessages,
+        temperature: safeTemp,
+        max_tokens: safeMaxTokens
+      })
+
+      const text =
+        fallbackResponse?.choices?.[0]?.message?.content ||
+        "⚠️ Empty fallback response"
+
+      return res.json({
+        reply: text
+      })
+
+    } catch (fallbackErr) {
+
+      console.error(
+        "Fallback error:",
+        fallbackErr.response?.data || fallbackErr.message
+      )
+
+      return res.status(500).json({
+        error: "All models failed"
+      })
+
+    }
   }
-
-}
-
 })
 
-app.listen(3001, ()=>{
+app.listen(3001, () => {
   console.log("Backend running on port 3001")
 })
